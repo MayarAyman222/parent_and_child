@@ -1,0 +1,52 @@
+<div class="container mt-4">
+  <h2 class="mb-3">User List</h2>
+
+  <!-- Add User Form -->
+  <form (ngSubmit)="addUser()" #userForm="ngForm" class="row g-3 mb-4">
+    <div class="col-md-4">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Enter Name"
+        [(ngModel)]="newUser.name"
+        name="name"
+        required
+      />
+    </div>
+    <div class="col-md-4">
+      <input
+        type="email"
+        class="form-control"
+        placeholder="Enter Email"
+        [(ngModel)]="newUser.email"
+        name="email"
+        required
+      />
+    </div>
+    <div class="col-md-4">
+      <button type="submit" class="btn btn-primary w-100" [disabled]="!userForm.form.valid">
+        Add User
+      </button>
+    </div>
+  </form>
+
+  <!-- Users Table -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <app-user-info
+        *ngFor="let user of users; let i = index"
+        [user]="user"
+        [index]="i"
+        (remove)="removeUser($event)">
+      </app-user-info>
+    </tbody>
+  </table>
+</div>
